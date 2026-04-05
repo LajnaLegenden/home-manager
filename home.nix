@@ -46,6 +46,13 @@ in
       find "$scripts_dir" -type f -exec chmod 755 {} +
     fi
   '';
+  home.activation.prepareMatugenCache = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    mkdir -p "${config.home.homeDirectory}/.cache/ml4w/matugen/waybar"
+    mkdir -p "${config.home.homeDirectory}/.cache/ml4w/matugen/swaync"
+
+    touch "${config.home.homeDirectory}/.cache/ml4w/matugen/waybar/colors.css"
+    touch "${config.home.homeDirectory}/.cache/ml4w/matugen/swaync/colors.css"
+  '';
 
   xdg.configFile."nvim".source =
     config.lib.file.mkOutOfStoreSymlink nvimRepoPath;

@@ -1,5 +1,5 @@
 
-@import '../../colors.css';
+@import '../../../../.cache/ml4w/matugen/swaync/colors.css';
 
 
 @define-color base alpha(@surface, 0.5);
