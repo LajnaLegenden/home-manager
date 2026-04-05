@@ -307,6 +307,13 @@ in
       };
     };
   };
+    programs.git = {
+        userName = "Linus Jansson"; # Replace with actual work name
+        userEmail = "34426335+LajnaLegenden@users.noreply.github.com"; # Replace with actual work email
+        extraConfig = {
+          core.editor = "nano";
+        };
+      };
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
