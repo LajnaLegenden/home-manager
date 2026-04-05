@@ -113,6 +113,11 @@ in
 
   xdg.configFile."nvim".source =
     config.lib.file.mkOutOfStoreSymlink nvimRepoPath;
+  xdg.configFile."btop".source = ./dots/btop;
+  xdg.configFile."fastfetch".source = ./dots/fastfetch;
+  xdg.configFile."matugen".source = ./dots/matugen;
+  xdg.configFile."swaync".source = ./dots/swaync;
+  xdg.configFile."waybar".source = ./dots/waybar;
   programs.zsh = {
     enable = true;
     enableCompletion = true;
