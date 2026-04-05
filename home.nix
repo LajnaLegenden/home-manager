@@ -40,6 +40,12 @@ in
       ${pkgs.git}/bin/git clone git@github.com:LajnaLegenden/nvim.git ${nvimRepoPath}
     fi
   '';
+  home.activation.setWaybarScriptPerms = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    scripts_dir="${config.xdg.configHome}/waybar/scripts"
+    if [ -d "$scripts_dir" ]; then
+      find "$scripts_dir" -type f -exec chmod 755 {} +
+    fi
+  '';
 
   xdg.configFile."nvim".source =
     config.lib.file.mkOutOfStoreSymlink nvimRepoPath;
@@ -72,7 +78,7 @@ in
     presets = [ "jetpack" ];
     settings = { };
   };
-  home.file = { };
+  home.file."Pictures/wallpapers".source = ./wallpapers;
 
   home.sessionVariables = {
     EDITOR = "nvim";
