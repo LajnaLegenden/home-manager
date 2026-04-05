@@ -8,6 +8,13 @@ let
     { key = "up"; vim = "K"; dir = "u"; resize = "0 -40"; }
     { key = "down"; vim = "J"; dir = "d"; resize = "0 40"; }
   ];
+  runOrNotify = cmd: pkgs.writeShellScript "run-${cmd}" ''
+    if command -v ${cmd} >/dev/null; then
+      exec ${cmd}
+    else
+      exec notify-send "Not installed" "${cmd} is not installed"
+    fi
+  '';
 
   workspaceKeys =
     map
@@ -57,6 +64,17 @@ in
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    (pkgs.writeShellScriptBin "run-or-notify" ''
+      cmd="$1"
+      shift
+
+      if command -v "$cmd" >/dev/null; then
+        exec "$cmd" "$@"
+      else
+        exec notify-send "Not installed" "$cmd is not installed"
+      fi
+    '')
+    fnm
     gnome-themes-extra
     imagemagick
     grimblast
@@ -64,6 +82,9 @@ in
     font-awesome
     # add fira code ned font
     jetbrains-mono
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.fira-code
+    nerd-fonts.hack
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -106,6 +127,25 @@ in
       expireDuplicatesFirst = true;
       share = true;
     };
+    initContent = ''
+      eval "$(fnm env)"
+    '';
+  };
+  programs.starship = {
+    enable = true;
+    # Configuration written to ~/.config/starship.toml
+    enableInteractive = true;
+    presets = [ "jetpack" ];
+    settings = {
+      # add_newline = false;
+
+      # character = {
+      #   success_symbol = "[➜](bold green)";
+      #   error_symbol = "[➜](bold red)";
+      # };
+
+      # package.disabled = true;
+    };
   };
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -142,19 +182,44 @@ in
     EDITOR = "nvim";
   };
 
+  programs.alacritty = {
+    enable = true;
+    package = null; # 👈 prevents Home Manager from installing it
+    settings = {
+      window.opacity = 0.9;
+      font = {
+        normal = {
+          family = "JetBrainsMono Nerd Font";
+          style = "Regular";
+        };
+        bold = {
+          family = "JetBrainsMono Nerd Font";
+          style = "Bold";
+        };
+        italic = {
+          family = "JetBrainsMono Nerd Font";
+          style = "Italic";
+        };
+        bold_italic = {
+          family = "JetBrainsMono Nerd Font";
+          style = "Bold Italic";
+        };
+        size = 12;
+      };
+    };
+  };
   wayland.windowManager.hyprland = {
     enable = true;
-
+    package = null;
     settings = {
       "$mainMod" = mainMod;
-
       bind =
         [
           "${mainMod}, RETURN, exec, alacritty"
           "${mainMod}, W, killactive,"
-          # "${mainMod}, V, togglefloating,"
-          "${mainMod}, SPACE, exec, notify-send no_launcher_installed"
-          "${mainMod}, T, exec, firefox"
+          "${mainMod}, V, togglefloating,"
+          "${mainMod}, SPACE, exec, run-or-notify vicinae toggle"
+          "${mainMod}, T, exec, run-or-notify firefox"
           "${mainMod}, I, togglesplit,"
           # "${mainMod} SHIFT, S, exec, grim -g \"$(slurp)\" - | wl-copy"
           # "${mainMod}, N, exec, swaync-client -t -sw"
@@ -195,6 +260,51 @@ in
         "${mainMod}, mouse:272, movewindow"
         "${mainMod}, mouse:273, resizewindow"
       ];
+      input = {
+        kb_layout = "se";
+        follow_mouse = 1;
+        kb_options = "meta:nocaps";
+        touchpad = {
+          natural_scroll = false;
+        };
+        sensitivity = 0;
+      };
+      env = [
+        "ELECTRON_EXTRA_LAUNCH_ARGS,--password-store=kwallet"
+        "GDK_BACKEND,wayland,x11,*"
+        "CLUTTER_BACKEND,wayland"
+        "SDL_VIDEODRIVER,wayland"
+        "ELECTRON_OZONE_PLATFORM_HINT,wayland"
+        "OZONE_PLATFORM,wayland"
+        "HYPRCURSOR_SIZE,24"
+        "XCURSOR_SIZE,24"
+        "MOZ_ENABLE_WAYLAND,1"
+        "GDK_SCALE,1"
+        "QT_QPA_PLATFORM,wayland;xcb"
+        "QT_QPA_PLATFORMTHEME,qt6ct"
+        "QT_QPA_PLATFORMTHEME,qt5ct"
+        "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+        "QT_AUTO_SCREEN_SCALE_FACTOR,1"
+        "XDG_CURRENT_DESKTOP,Hyprland"
+        "XDG_SESSION_TYPE,wayland"
+        "XDG_SESSION_DESKTOP,Hyprland"
+      ];
+
+
+      exec-once = [
+        "vicinae server"
+        "swaync"
+        "hypridle"
+        "wl-paste --watch cliphist store"
+        "sunsetr"
+      ];
+
+
+      misc = {
+        force_default_wallpaper = 1;
+        vfr = true;
+        vrr = true;
+      };
     };
   };
   # Let Home Manager install and manage itself.
