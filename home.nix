@@ -3,7 +3,10 @@ let
   nvimRepoPath = "/home/lajna/Personal/nvim";
 in
 {
-  imports = [ ./hyprland.nix ];
+  imports = [
+    ./hyprland.nix
+    ./hyprlock.nix
+  ];
 
   home.username = "lajna";
   home.homeDirectory = "/home/lajna";
