@@ -48,6 +48,7 @@ in
   xdg.configFile."matugen".source = ./dots/matugen;
   xdg.configFile."swaync".source = ./dots/swaync;
   xdg.configFile."waybar".source = ./dots/waybar;
+  xdg.configFile."scripts".source = ./dots/scripts;
   programs.zsh = {
     enable = true;
     enableCompletion = true;

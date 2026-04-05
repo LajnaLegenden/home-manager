@@ -13,11 +13,10 @@
     ],
     // Modules Left
     "modules-left": [
-        "custom/appmenu",
         "clock",
         //"wlr/taskbar",
         //"group/quicklinks",
-        //"custom/nowplaying",        
+        "custom/nowplaying",        
         "custom/empty"
     ],
     // Modules Center
@@ -27,9 +26,8 @@
     ],
     // Modules Right    
     "modules-right": [
-        "custom/updates",
         "pulseaudio",
-        //"backlight",
+        "backlight",
         "bluetooth",
         "network",
         "battery",
@@ -38,6 +36,5 @@
         "tray",
         "custom/notification",
         "custom/exit",
-        "custom/ml4w-welcome"
     ]
 }
