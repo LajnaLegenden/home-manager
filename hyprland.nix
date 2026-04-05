@@ -51,8 +51,6 @@ in
           "${mainMod}, SPACE, exec, run-or-notify vicinae toggle"
           "${mainMod}, T, exec, run-or-notify firefox"
           "${mainMod}, I, togglesplit,"
-          # "${mainMod} SHIFT, S, exec, grim -g \"$(slurp)\" - | wl-copy"
-          # "${mainMod}, N, exec, swaync-client -t -sw"
 
           "${mainMod} CTRL, H, movecurrentworkspacetomonitor, l"
           "${mainMod} CTRL, L, movecurrentworkspacetomonitor, r"

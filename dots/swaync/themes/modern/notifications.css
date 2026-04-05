@@ -1,7 +1,7 @@
 @import '../../colors.css';
 
-/* === Derived dynamic colors === */
-@define-color base alpha(@surface, 0.5);                      /* translucent blurred base */
+
+@define-color base alpha(@surface, 0.5);                      
 @define-color surface_custom alpha(@surface_container_high,0.8);
 @define-color hovercolor alpha(@surface_container_high,0.8);
 @define-color activecolor @primary_container;
@@ -34,7 +34,7 @@
 }
 
 .floating-notifications.background .notification-row .notification-background .notification.critical {
-  background: @base;       /* translucent blur */
+  background: @base;       
   border-radius: 10px;
   border: 2px solid @primary;
   margin: 5px 10px;

@@ -1,7 +1,7 @@
-/* Import Matugen generated colors */
+
 @import '../../colors.css';
 
-/* === Derived dynamic colors === */
+
 @define-color base alpha(@surface, 0.5);
 @define-color surface_custom alpha(@surface_container_high,1);
 @define-color hovercolor alpha(@surface_container_high,1);
@@ -15,7 +15,7 @@
 @define-color fontcolor @on_surface;
 @define-color text @on_surface;
 
-/* === Global Reset === */
+
 * {
   color: @text;
   font-size: 1rem;
@@ -31,7 +31,7 @@
 
 }
 
-/* === Control Center Container === */
+
 .control-center {
     background-color: @surface;
     border-radius: 12px;
@@ -44,7 +44,7 @@
     box-shadow: 0 1px 10px 1px rgba(0, 0, 0, 0.3), 0 1px 10px 1px rgba(0, 0, 0, 0.7),
       0 2px 10px 2px rgba(0, 0, 0, 0.3);}
 
-/* === Buttons grid === */
+
 .widget-buttons-grid {
   margin: 6px 6px 6px 6px;
   border-radius: 0px;
@@ -86,7 +86,7 @@
   transform: scale(0.8)
 }
 
-/* === Brightness === */
+
 .widget-volume {
   padding: 12px 16px;
   margin: 0px 12px 20px 12px;
@@ -124,7 +124,7 @@
   font-size: 20px;
 }
 
-/* === Music Player === */
+
 .widget-mpris {
   border-radius: 10px;
   margin: 2px 12px 12px 12px;
@@ -176,7 +176,7 @@
 }
 
 
-/* === Notification Clear Button === */
+
 
 .widget-title {
   font-size: 1.5rem;
@@ -195,7 +195,7 @@
   border-radius: 15px;
 }
 
-/* === Do Not Disturb === */
+
 
 .widget-dnd {
   margin: 15px 15px 5px 12px;
@@ -235,7 +235,7 @@
   border-radius: 7px;
 }
 
-/* === Notifications === */
+
 
 .control-center .notification-row .notification-background .notification.critical {
   background-color: @surface_container;
@@ -262,7 +262,7 @@
   margin: 10px 15px;
 }
 
-/* === Progress Bars === */
+
 
 trough highlight {
   background: @primary;
@@ -270,7 +270,7 @@ trough highlight {
   border-radius: 20px;
 }
 
-/* === Notification Groups === */
+
 
 .notification-group {
   margin: 4px 12px 4px 12px;

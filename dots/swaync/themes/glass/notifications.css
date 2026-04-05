@@ -1,7 +1,7 @@
 @import '../../colors.css';
 
-/* === Derived dynamic colors === */
-@define-color base alpha(@surface, 0.8);                      /* translucent blurred base */
+
+@define-color base alpha(@surface, 0.8);                      
 @define-color surface_custom alpha(@surface_container_high,0.8);
 @define-color hovercolor alpha(@surface_container_high,0.8);
 @define-color activecolor @primary_container;
@@ -51,7 +51,7 @@
     box-shadow: 1 1 5 1px @shadow;
 }
 
-/*This is the margin for the floating notifications on desktop only!*/
+
 
 .floating-notifications.background
   .notification-row
